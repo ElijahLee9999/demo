@@ -53,11 +53,11 @@ public class ${table.controllerName} {
 #set($lowerCamelEntity=${entity.substring(0,1).toLowerCase()}+${entity.substring(1,$entity.length())})
 #set($lowerCamelService=${table.serviceName.substring(0,1).toLowerCase()}+${table.serviceName.substring(1,$table.serviceName.length())})
 
-  private final ${table.serviceName} ${lowerCamelService};
+    private final ${table.serviceName} ${lowerCamelService};
 
-  public ${entity}Controller(${table.serviceName} ${lowerCamelService}) {
-    this.${lowerCamelService} = ${lowerCamelService};
-  }
+    public ${entity}Controller(${table.serviceName} ${lowerCamelService}) {
+        this.${lowerCamelService} = ${lowerCamelService};
+    }
 
   /**
    * 列表
@@ -66,89 +66,94 @@ public class ${table.controllerName} {
    * @return Result
    */
   @GetMapping("/")
-  public Result list(QueryVo queryVo) {
-    //查询列表数据
-    log.debug("enter list.");
+    public Result list(QueryVo queryVo) {
+        //查询列表数据
+        log.debug("enter list.");
 
-    IPage<${entity}> page = new Page<>(queryVo.getCurrentPage(), queryVo.getPageSize());
-    QueryWrapper<${entity}> wrapper = new QueryWrapper<>();
-    IPage<${entity}> pageList = ${lowerCamelService}.page(page, wrapper);
-    PageInfo pageInfo = new PageInfo(page.getCurrent(), page.getPages(), page.getSize(), page.getTotal(), page.getRecords());
+        IPage<${entity}> page = new Page<>(queryVo.getCurrentPage(), queryVo.getPageSize());
+        QueryWrapper<${entity}> wrapper = new QueryWrapper<>();
+        IPage<${entity}> result = ${lowerCamelService}.page(page, wrapper);
+        PageInfo pageInfo = new PageInfo(result);
 
-    return Result.ok(pageInfo);
-  }
-
-  @GetMapping("/{id}")
-  public Result getById(@PathVariable Long id) {
-    log.debug("query one by id.");
-    ${entity} ${lowerCamelEntity} = ${lowerCamelService}.getById(id);
-    return Result.ok(${lowerCamelEntity});
-  }
-
-  /**
-   * 保存
-   *
-   * @param ${lowerCamelEntity} ${entity}
-   * @return Result
-   */
-  @PostMapping("/")
-  public Result save(@RequestBody ${entity} ${lowerCamelEntity}) {
-    log.debug("enter save.");
-    ${lowerCamelService}.save(${lowerCamelEntity});
-    return Result.ok();
+        return Result.ok(pageInfo);
     }
 
-  /**
-   * 批量保存
-   *
-   * @param items List<${entity}>
-   * @return Result
-   */
-  @PostMapping("/batch")
-  public Result saveBatch(@RequestBody List<${entity}> items) {
-    log.debug("enter saveBatch.");
-    ${lowerCamelService}.saveBatch(items);
-    return Result.ok();
-  }
+    /**
+    * 根据Id获取实体
+    * @param id Long
+    * @return Result
+    */
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Long id) {
+        log.debug("query one by id.");
+        ${entity} ${lowerCamelEntity} = ${lowerCamelService}.getById(id);
+        return Result.ok(${lowerCamelEntity});
+    }
 
-  /**
-   * 修改
-   *
-   * @param ${lowerCamelEntity} ${entity}
-   * @return Result
-   */
-  @PutMapping("/")
-  public Result update(@RequestBody ${entity} ${lowerCamelEntity}) {
-    log.debug("enter update.");
-    ${lowerCamelService}.updateById(${lowerCamelEntity});
-    return Result.ok();
-  }
+    /**
+    * 保存
+    *
+    * @param ${lowerCamelEntity} ${entity}
+    * @return Result
+    */
+    @PostMapping("/")
+    public Result save(@RequestBody ${entity} ${lowerCamelEntity}) {
+        log.debug("enter save.");
+        ${lowerCamelService}.save(${lowerCamelEntity});
+        return Result.ok();
+    }
 
-  /**
-   * 批量修改
-   *
-   * @param items List<${entity}>
-   * @return Result
-   */
-  @PutMapping("/batch")
-  public Result updateBatch(@RequestBody List<${entity}> items) {
-    log.debug("enter updateBatch.");
-    ${lowerCamelService}.updateBatchById(items);
-    return Result.ok();
-  }
+    /**
+    * 批量保存
+    *
+    * @param items List<${entity}>
+    * @return Result
+    */
+    @PostMapping("/batch")
+    public Result saveBatch(@RequestBody List<${entity}> items) {
+        log.debug("enter saveBatch.");
+        ${lowerCamelService}.saveBatch(items);
+        return Result.ok();
+    }
 
-  /**
-   * 删除
-   *
-   * @param ${lowerCamelEntity}Ids Long[]
-   * @return Result
-   */
-  @DeleteMapping("/")
-  public Result delete(Long[] ${lowerCamelEntity}Ids) {
-    log.debug("enter delete.");
-    ${lowerCamelService}.removeByIds(Arrays.asList(${lowerCamelEntity}Ids));
-    return Result.ok();
-  }
+    /**
+    * 修改
+    *
+    * @param ${lowerCamelEntity} ${entity}
+    * @return Result
+    */
+    @PutMapping("/")
+    public Result update(@RequestBody ${entity} ${lowerCamelEntity}) {
+        log.debug("enter update.");
+        ${lowerCamelService}.updateById(${lowerCamelEntity});
+        return Result.ok();
+    }
+
+    /**
+    * 批量修改
+    *
+    * @param items List<${entity}>
+    * @return Result
+    */
+    @PutMapping("/batch")
+    public Result updateBatch(@RequestBody List<${entity}> items) {
+        log.debug("enter updateBatch.");
+        ${lowerCamelService}.updateBatchById(items);
+        return Result.ok();
+    }
+
+    /**
+    * 删除
+    *
+    * @param ${lowerCamelEntity}Ids Long[]
+    * @return Result
+    */
+    @DeleteMapping("/")
+    public Result delete(Long[] ${lowerCamelEntity}Ids) {
+        log.debug("enter delete.");
+        ${lowerCamelService}.removeByIds(Arrays.asList(${lowerCamelEntity}Ids));
+        return Result.ok();
+    }
 }
 
 #end

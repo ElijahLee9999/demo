@@ -1,5 +1,7 @@
 package com.example.demo.common;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.example.demo.demo.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -21,5 +23,18 @@ public class PageInfo<T> {
 
     public PageInfo() {
         this.item = new ArrayList<>();
+    }
+
+    public PageInfo(IPage<T> page) {
+        this.currentPage = page.getCurrent();
+        this.totalPage = page.getPages();
+        this.pageSize = page.getSize();
+        this.total = page.getTotal();
+        List<T> item = page.getRecords();
+        if (null == item || item.size() == 0) {
+            this.item = new ArrayList<>();
+        } else {
+            this.item = item;
+        }
     }
 }

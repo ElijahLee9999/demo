@@ -33,101 +33,101 @@ import java.util.List;
 public class StudentController {
 
 
-  private final IStudentService iStudentService;
+    private final IStudentService iStudentService;
 
-  public StudentController(IStudentService iStudentService) {
-    this.iStudentService = iStudentService;
-  }
-
-  /**
-   * 列表
-   *
-   * @param queryVo QueryVo
-   * @return Result
-   */
-  @GetMapping("/")
-  public Result list(QueryVo queryVo) {
-    //查询列表数据
-    log.debug("enter list.");
-
-    IPage<Student> page = new Page<>(queryVo.getCurrentPage(), queryVo.getPageSize());
-    QueryWrapper<Student> wrapper = new QueryWrapper<>();
-    IPage<Student> pageList = iStudentService.page(page, wrapper);
-    PageInfo pageInfo = new PageInfo(page.getCurrent(), page.getPages(), page.getSize(), page.getTotal(), page.getRecords());
-
-    return Result.ok(pageInfo);
-  }
-
-  @GetMapping("/{id}")
-  public Result getById(@PathVariable Long id) {
-    log.debug("query one by id.");
-    Student student = iStudentService.getById(id);
-    return Result.ok(student);
-  }
-
-  /**
-   * 保存
-   *
-   * @param student Student
-   * @return Result
-   */
-  @PostMapping("/")
-  public Result save(@RequestBody Student student) {
-    log.debug("enter save.");
-    iStudentService.save(student);
-    return Result.ok();
+    public StudentController(IStudentService iStudentService) {
+        this.iStudentService = iStudentService;
     }
 
-  /**
-   * 批量保存
-   *
-   * @param items List<Student>
-   * @return Result
-   */
-  @PostMapping("/batch")
-  public Result saveBatch(@RequestBody List<Student> items) {
-    log.debug("enter saveBatch.");
-    iStudentService.saveBatch(items);
-    return Result.ok();
-  }
+    /**
+     * 列表
+     *
+     * @param queryVo QueryVo
+     * @return Result
+     */
+    @GetMapping("/")
+    public Result list(QueryVo queryVo) {
+        //查询列表数据
+        log.debug("enter list.");
 
-  /**
-   * 修改
-   *
-   * @param student Student
-   * @return Result
-   */
-  @PutMapping("/")
-  public Result update(@RequestBody Student student) {
-    log.debug("enter update.");
-    iStudentService.updateById(student);
-    return Result.ok();
-  }
+        IPage<Student> page = new Page<>(queryVo.getCurrentPage(), queryVo.getPageSize());
+        QueryWrapper<Student> wrapper = new QueryWrapper<>();
+        IPage<Student> result = iStudentService.page(page);
+        PageInfo pageInfo = new PageInfo(result);
 
-  /**
-   * 批量修改
-   *
-   * @param items List<Student>
-   * @return Result
-   */
-  @PutMapping("/batch")
-  public Result updateBatch(@RequestBody List<Student> items) {
-    log.debug("enter updateBatch.");
-    iStudentService.updateBatchById(items);
-    return Result.ok();
-  }
+        return Result.ok(pageInfo);
+    }
 
-  /**
-   * 删除
-   *
-   * @param studentIds Long[]
-   * @return Result
-   */
-  @DeleteMapping("/")
-  public Result delete(Long[] studentIds) {
-    log.debug("enter delete.");
-    iStudentService.removeByIds(Arrays.asList(studentIds));
-    return Result.ok();
-  }
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Long id) {
+        log.debug("query one by id.");
+        Student student = iStudentService.getById(id);
+        return Result.ok(student);
+    }
+
+    /**
+     * 保存
+     *
+     * @param student Student
+     * @return Result
+     */
+    @PostMapping("/")
+    public Result save(@RequestBody Student student) {
+        log.debug("enter save.");
+        iStudentService.save(student);
+        return Result.ok();
+    }
+
+    /**
+     * 批量保存
+     *
+     * @param items List<Student>
+     * @return Result
+     */
+    @PostMapping("/batch")
+    public Result saveBatch(@RequestBody List<Student> items) {
+        log.debug("enter saveBatch.");
+        iStudentService.saveBatch(items);
+        return Result.ok();
+    }
+
+    /**
+     * 修改
+     *
+     * @param student Student
+     * @return Result
+     */
+    @PutMapping("/")
+    public Result update(@RequestBody Student student) {
+        log.debug("enter update.");
+        iStudentService.updateById(student);
+        return Result.ok();
+    }
+
+    /**
+     * 批量修改
+     *
+     * @param items List<Student>
+     * @return Result
+     */
+    @PutMapping("/batch")
+    public Result updateBatch(@RequestBody List<Student> items) {
+        log.debug("enter updateBatch.");
+        iStudentService.updateBatchById(items);
+        return Result.ok();
+    }
+
+    /**
+     * 删除
+     *
+     * @param studentIds Long[]
+     * @return Result
+     */
+    @DeleteMapping("/")
+    public Result delete(Long[] studentIds) {
+        log.debug("enter delete.");
+        iStudentService.removeByIds(Arrays.asList(studentIds));
+        return Result.ok();
+    }
 }
 

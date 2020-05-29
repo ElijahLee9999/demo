@@ -1,5 +1,7 @@
 package com.example.demo.config;
 
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -69,5 +71,18 @@ public class MyBatisConfig {
         public Class<DateTime> handledType() {
             return DateTime.class;
         }
+    }
+
+    /**
+     * 分页插件
+     */
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
+        // 设置最大单页限制数量
+        paginationInterceptor.setLimit(1000);
+        // 开启 count 的 join 优化,只针对部分 left join
+        paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
+        return paginationInterceptor;
     }
 }

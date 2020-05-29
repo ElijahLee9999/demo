@@ -17,18 +17,18 @@ import org.joda.time.DateTime;
 import java.io.Serializable;
 
 /**
-* 学生表
-*
-* @author Elijah
-* @since 2020-05-28
-*/
+ * 学生表
+ *
+ * @author Elijah
+ * @since 2020-05-28
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Student对象", description = "学生表")
-public class Student implements Serializable{
+public class Student implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
