@@ -1,7 +1,6 @@
 package com.example.demo.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.example.demo.utils.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.joda.time.DateTime;

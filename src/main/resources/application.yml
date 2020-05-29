@@ -26,8 +26,6 @@ mybatis-plus:
       id-type: ID_WORKER
       #字段策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断")  NOT_EMPTY:"非空判断"
       field-strategy: NOT_EMPTY
-      #数据库类型
-      db-type: MYSQL
   configuration:
     # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
     map-underscore-to-camel-case: true
@@ -40,7 +38,6 @@ mybatis-plus:
   typeEnumsPackage: com.example.demo.*.enums
 
 #ID_WORKER配置
-idworker:
-  config:
-    workerid: 1
-    datacenterid: 1
+id-generator:
+  worker-id: 2
+  data-center-id: 2

@@ -1,7 +1,7 @@
 package com.example.demo.config;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
-import com.example.demo.utils.IdWorker;
+import com.example.demo.utils.IdGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class IdWorkerIdGenerator implements IdentifierGenerator {
+
     @Override
     public Number nextId(Object entity) {
-        return IdWorker.init().nextId();
+        return IdGenerator.getId();
     }
 }
